@@ -20,15 +20,25 @@ contract UniqueAssetToken is ERC20F {
      * @param defaultAdmin Admin address
      * @param minter Minter address
      * @param pauser Pauser address
+     * @param navOracleAddress Chainlink NAV Oracle address
+     * @param porOracleAddress Chainlink Proof of Reserve Oracle address
      */
     function initialize(
+        string memory name,
+        string memory symbol,
         address defaultAdmin,
         address minter,
-        address pauser
+        address pauser,
+        address navOracleAddress,
+        address porOracleAddress
     ) public initializer {
-        // Initialize base ERC20F with name "UniqueAsset" and symbol "UAT"
-        super.initialize("UniqueAsset", "UAT", defaultAdmin, minter, pauser);
+        // Initialize base ERC20F with user-provided name and symbol
+        super.initialize(name, symbol, defaultAdmin, minter, pauser);
         
+        // Configure oracles immediately
+        navOracle = AggregatorV3Interface(navOracleAddress);
+        porOracle = AggregatorV3Interface(porOracleAddress);
+
         // Mint initial supply of 10 tokens (with 18 decimals) to the deployer
         _mint(msg.sender, 10 * 10**decimals());
     }

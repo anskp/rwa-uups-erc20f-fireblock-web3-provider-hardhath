@@ -40,7 +40,9 @@ If you are building a React/Web3 app, you can copy the array below:
     "inputs": [
       { "internalType": "address", "name": "defaultAdmin", "type": "address" },
       { "internalType": "address", "name": "minter", "type": "address" },
-      { "internalType": "address", "name": "pauser", "type": "address" }
+      { "internalType": "address", "name": "pauser", "type": "address" },
+      { "internalType": "address", "name": "navOracleAddress", "type": "address" },
+      { "internalType": "address", "name": "porOracleAddress", "type": "address" }
     ],
     "name": "initialize",
     "outputs": [],

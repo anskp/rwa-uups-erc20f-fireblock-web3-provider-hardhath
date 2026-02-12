@@ -23,11 +23,13 @@ async function main() {
     console.log("\n2️⃣ Deploying UUPS Proxy...");
     const FireblocksProxy = await ethers.getContractFactory("FireblocksProxy", signer);
 
-    // Encode initialization data (3 args: admin, minter, pauser)
-    const initData = UniqueAssetToken.interface.encodeFunctionData("initialize(address,address,address)", [
+    // Encode initialization data (5 args: admin, minter, pauser, navOracle, porOracle)
+    const initData = UniqueAssetToken.interface.encodeFunctionData("initialize(address,address,address,address,address)", [
         signerAddress, // defaultAdmin
         signerAddress, // minter
-        signerAddress  // pauser
+        signerAddress, // pauser
+        process.env.NAV_ORACLE_ETH_USD, // navOracle
+        process.env.POR_ORACLE_BTC_USD  // porOracle
     ]);
 
     const proxy = await FireblocksProxy.deploy(implAddress, initData);

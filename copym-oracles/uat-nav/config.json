@@ -1,0 +1,12 @@
+{
+    "schedule": "0 */5 * * * *",
+    "url": "https://api.m0.xyz/api/dashboard-backend-api/api/rpc",
+    "dataIdHex": "0x544553542d4e4156000000000000000000000000000000000000000000000000",
+    "evms": [
+        {
+            "dataFeedsCacheAddress": "0x1d598672486ecB50685Da5497390571Ac4E93FDc",
+            "chainName": "ethereum-testnet-sepolia",
+            "gasLimit": "500000"
+        }
+    ]
+}

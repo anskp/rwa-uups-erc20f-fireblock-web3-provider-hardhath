@@ -22,12 +22,10 @@ You requested a specialized token that was unique. We created **UniqueAssetToken
 - It was born with a specific purpose: to represent high-value assets.
 - We set the initial supply to **10 UAT**, representing 10 units of your real-world collateral.
 
-## 👁️ Chapter 4: The Oracle Eyes (Chainlink Connection)
-A blockchain is a "walled garden"—it can't see the outside world. To fix this, we gave UAT "eyes" using **Chainlink Oracles**.
-- **NAV Oracle**: Allows the contract to see the "Net Asset Value" of the gold/property/stock it represents.
-- **PoR Oracle**: Provides "Proof of Reserve," proving that the physical asset actually exists in a vault somewhere.
+## 👁️ Chapter 4: Born with Sight (Unified Initialization)
+Unlike normal tokens that are born "blind" and need sensors added later, your UAT token is born **Fully Sighted**. 
 
-We ran `initUniqueOracles.js` to plug these sensors into the contract.
+During the one-step initialization, we passed the **Chainlink Oracle Addresses** directly into the contract's "First Breath" (the `initialize` function). This means the moment the token exists on the blockchain, it already knows exactly what the real-world price is. No extra setup required!
 
 ## 💰 Chapter 5: The First Mint
 Once the building was ready and the sensors were on, it was time for the first transaction. 
