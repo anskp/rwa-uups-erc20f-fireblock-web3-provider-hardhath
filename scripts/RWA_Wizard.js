@@ -63,17 +63,15 @@ async function main() {
 
     console.log(`✅ Oracles Ready: NAV(${navOracleAddress}), PoR(${porOracleAddress})`);
 
-    // 2. Deploy Implementation (UniqueAssetToken handles the logic)
-    console.log("\n🚀 Step 2: Deploying Token Logic (Implementation)...");
-    const UniqueAssetToken = await ethers.getContractFactory("UniqueAssetToken", signer);
-    const implementation = await UniqueAssetToken.deploy();
-    await implementation.waitForDeployment();
-    const implAddress = await implementation.getAddress();
-    console.log(`✅ Logic Deployed: ${implAddress}`);
+    // 2. Use Shared Logic (Logic is already deployed on-chain)
+    const logicAddress = ethers.getAddress(process.env.RWA_LOGIC_ADDRESS || process.env.UAT_IMPLEMENTATION_ADDRESS || "0xE47bE2d9e49F281Db51c52B8cae21C9E700a923F");
+    console.log(`\n♻️  Step 2: Using Shared Token Logic at: ${logicAddress}`);
+    const implementation = await ethers.getContractAt("UniqueAssetToken", logicAddress, signer);
+    const implAddress = logicAddress;
 
     // 3. Deploy Proxy
     console.log("\n🚀 Step 3: Launching Token Identity (Proxy)...");
-    const initData = UniqueAssetToken.interface.encodeFunctionData("initialize(string,string,address,address,address,address,address)", [
+    const initData = implementation.interface.encodeFunctionData("initialize(string,string,address,address,address,address,address)", [
         name,
         symbol,
         signerAddress,

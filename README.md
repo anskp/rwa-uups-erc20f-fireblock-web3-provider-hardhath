@@ -66,7 +66,27 @@ To view the real-time on-chain oracle data:
 node scripts/checkOracles.js
 ```
 
-### 🏢 Simplified AnasToken (Non-Upgradeable)
+---
+
+## 🧙‍♂️ RWA Wizard
+
+The **RWA Wizard** is an interactive CLI tool designed to deploy a full asset stack (Oracles + Proxy + Initial Mint) in one go.
+
+### Usage
+```bash
+npx hardhat run scripts/RWA_Wizard.js
+```
+*Note: Always use `npx hardhat run` to ensure the Fireblocks Ethers provider is correctly initialized.*
+
+### 🛠️ Technical Fixes Applied
+- **Checksum Enforcement**: All addresses are normalized to **EIP-55** via `ethers.getAddress` to prevent "bad address checksum" errors on Sepolia.
+- **Ambiguity Resolution**: The initialization of the `UniqueAssetToken` proxy uses the full function signature `initialize(string,string,address,address,address,address,address)` to distinguish between overloaded versions in the ABI.
+- **Dynamic Artifact Loading**: Scripts now load contract artifacts dynamically from `artifacts/` rather than using hardcoded bytecode strings, ensuring consistency with recent compilations.
+- **Implementation Pinning**: The project uses a verified implementation at `0xE47bE2d9e49F281Db51c52B8cae21C9E700a923F` found via ERC1967 storage slot analysis.
+
+---
+
+## 🏢 Simplified AnasToken (Non-Upgradeable)
 
 - **Name**: `anas`
 - **Symbol**: `AKP`
